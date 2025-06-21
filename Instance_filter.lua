@@ -50,6 +50,7 @@ local CHAR = LOCAL_PLAYER.Character or LOCAL_PLAYER.CharacterAdded:Wait()
 local HUM = CHAR:WaitForChild("Humanoid")
 local HRP = CHAR:WaitForChild("HumanoidRootPart")
 local GLOBAL = _G or getgenv()
+if GLOBAL._FILTERED then return end
 local TRASH = {"Light", "ParticleEmitter", "Fire", "Smoke",
                "Beam", "Trail", "Explosion", "Sound",
                "BodyPosition", "AlignPosition", "LinearPosition",
