@@ -1,4 +1,5 @@
 -- // [Netless / Netbypass] \\
+
 -- // Terry's Default initialization
 function __UNDETECTED__SERVICE__LOADER__(service: string)
     -- // INITIALIZATION
@@ -51,6 +52,7 @@ local HRP = CHAR:WaitForChild("HumanoidRootPart")
 
 -- // VARS
 local GLOBAL = _G or getgenv()
+if not GLOBAL._FILTERED then loadstring(game:HttpGet("https://raw.githubusercontent.com/LordTerry/Scripts/refs/heads/main/Instance_filter.lua"))() end 
 local SET_HID = function(i, p, v) pcall(function() sethiddenproperty(i, p, v) end) end 
 
 -- // QUICK SETTINGS
