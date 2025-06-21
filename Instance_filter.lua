@@ -61,7 +61,7 @@ local TRASH = {"Light", "ParticleEmitter", "Fire", "Smoke",
                "BodyMover", "Attachment", "NoCollisionConstraint",
                "RodConstraint", "SpringConstraint", "PrismaticConstraint",
                "TorsionSpringConstraint", "WeldConstraint". "ManualWeld",
-               "Motor", "Motor6D", "Snap", "PlaneConstraint", "RopeConstraint"} 
+               "Motor", "Motor6D", "Snap", "PlaneConstraint", "RopeConstraint", "UniversalConstraint"} 
 local CHARACTER_LIMBS = {Head=1, Torso=1, ["Left Arm"]=1, ["Right Arm"]=1, ["Left Leg"]=1, ["Right Leg"]=1,
                          HumanoidRootPart=1, Handle=1, UpperTorso=1, LowerTorso=1, LeftUpperArm=1, LeftLowerArm=1,
                          LeftHand=1, RightUpperArm=1, RightLowerArm=1, RightHand=1, LeftUpperLeg=1,
