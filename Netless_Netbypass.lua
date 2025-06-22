@@ -54,6 +54,11 @@ local HRP = CHAR:WaitForChild("HumanoidRootPart")
 local GLOBAL = _G or getgenv()
 if not GLOBAL._FILTERED then loadstring(game:HttpGet("https://raw.githubusercontent.com/LordTerry/Scripts/refs/heads/main/Instance_filter.lua"))() end 
 local SET_HID = function(i, p, v) pcall(function() sethiddenproperty(i, p, v) end) end 
+local SETTINGS = {
+    ["NETLESS_VEL"] = 26.6565464,
+    ["USE_VELOCITY_PROP"] = false,
+    ["DEBUG"] = false
+}
 
 -- // QUICK SETTINGS
 settings()["Physics"].AllowSleep = false
@@ -62,8 +67,11 @@ settings()["Physics"].ThrottleAdjustTime = math.huge
 settings()["Physics"].DisableCSGv2 = true
 settings()["Physics"].ForceCSGv2 = true
 settings()["Physics"].UseCSGv2 = true
+
+if SETTINGS.DEBUG then
 settings()["Physics"].AreOwnersShown = true
 settings()["Physics"].AreRegionsShown = true
+end
 workspace.StreamingEnabled = false
 
 RUN_SERVICE.PreSimulation:Connect(function()
@@ -80,12 +88,14 @@ RUN_SERVICE.PreSimulation:Connect(function()
     end
     
     for _, v in GLOBAL._FILTERED do
-        SET_HID(v, "Velocity", Vector3.new(26.6565464, 26.6565464, 26.6565464))
-        SET_HID(v, "AssemblyLinearVelocity", Vector3.new(26.6565464, 26.6565464, 26.6565464))
+        if SETTINGS.USE_VELOCITY_PROP then SET_HID(v, "Velocity", Vector3.new(SETTINGS.NETLESS_VEL, SETTINGS.NETLESS_VEL, SETTINGS.NETLESS_VEL))
+        else SET_HID(v, "AssemblyLinearVelocity", Vector3.new(SETTINGS.NETLESS_VEL, SETTINGS.NETLESS_VEL, SETTINGS.NETLESS_VEL)) end
         SET_HID(v, "RootPriority", 127)
         SET_HID(v, "Massless", true)
         SET_HID(v, "CanCollide", false)
+        SET_HID(v, "CanTouch", false)
+        SET_HID(v, "CanQuery", false)
         SET_HID(v, "NetworkIsSleeping", false)
-        SET_HID(v, "CustomPhysicalProperties", PhysicalProperties.new(0, 0, 0))
+        SET_HID(v, "CustomPhysicalProperties", PhysicalProperties.new(0, 0, 0, 0, 0))
     end
 end)
