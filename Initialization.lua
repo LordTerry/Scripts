@@ -3,28 +3,29 @@ function __UNDETECTED__SERVICE__LOADER__(service: string)
     -- // INITIALIZATION
     local __SERVICE__ORIGINAL__ = game:FindFirstChildWhichIsA(service) or game:GetService(service) -- // FindFirstChildWhichIsA Helps finding services pre-loaded more faster.
     local __SERVICE__PROXY__ = newproxy(true)
-			   local __METATABLE__ = getmetatable(__SERVICE__PROXY__)
+    local __METATABLE__ = getmetatable(__SERVICE__PROXY__)
 			   
     -- // CREATES NECESSARY METAMETHODS FOR THE NEW PROXY.
     function __METATABLE__:__newindex(key: string, value: any)
         __SERVICE__ORIGINAL__[key] = value
-			   end
-			   function __METATABLE__:__index(key: string)
-			        local __index = __SERVICE__ORIGINAL__[key]
-				        if type(__index) == "function" then
-				            return function(self, ...)
-				                return __index(__SERVICE__ORIGINAL__, ...)
-				            end
-				        end
-				        return __index
-			   end
+    end
+    function __METATABLE__:__index(key: string)
+	local __index = __SERVICE__ORIGINAL__[key]
+	if type(__index) == "function" then
+		return function(self, ...)
+			return __index(__SERVICE__ORIGINAL__, ...)
+		end
+	end
+	return __index
+    end
     
     -- // LOCKING...
-			   __METATABLE__.__type = "Instance"
-			   __METATABLE__.__metatable = "Locked."
-			
-			   return __SERVICE__PROXY__
-		end
+    __METATABLE__.__type = "Instance"
+    __METATABLE__.__metatable = "Locked."
+	
+    if __SERVICE__PROXY__ == __SERVICE__ORIGINAL__ then return "DETECTED_SERVICE" end
+    return __SERVICE__PROXY__
+end
 
 -- // SOME VARIABLES
 local RUN_SERVICE = __UNDETECTED__SERVICE__LOADER__("RunService")
