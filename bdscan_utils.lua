@@ -8,7 +8,9 @@ local HONEYPOT_NAMES = {"Kick", "kick", "Ban", "ban", "KickClient", "BanClient",
                         "ban_players", "BanAnticheat", "KickAnticheat", "BanAntiCheat", "KickAntiCheat", 
                         "Ban_AntiCheat", "Kick_AntiCheat", "ban_AntiCheat", "kick_AntiCheat", "ban_anticheat",
                         "kick_anticheat", "Ban_Anti_Cheat", "Kick_Anti_Cheat", "kick_Anti_Cheat", "ban_Anti_Cheat",
-                        "kick_anti_cheat", "ban_anti_cheat"}
+                        "kick_anti_cheat", "ban_anti_cheat", "AwardMoney", "KickMe", "BanMe", "kickme", "banme",
+                        "kick_me", "ban_me", "Kick_Me", "Ban_Me", "KickUser", "BanUser", "kickuser", "banuser",
+                        "kick_user", "ban_user", "Kick_User", "Ban_User"}
 
 function __FILTER__HANDLER__(v: Instance)
   if v:IsA("RemoteEvent") or v:IsA("RemoteFunction") and not (v.Name == "__FUNCTION" or v.Parent.Name == "__FUNCTION" or v:FindFirstChild("__FUNCTION")) then
