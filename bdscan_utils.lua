@@ -127,7 +127,7 @@ function __VULNERABILITY__HANDLER__(v: Instance)
     end
   end
   do
-    __REMOTE__RUNNER__(v, {[1]="cGlja2V0dA=="}, CODE)
+    __REMOTE__RUNNER__(v, unpack({[1]="cGlja2V0dA=="}), CODE)
     task.wait()
     if REPLICATED_STORAGE["___T3RRY___"] then
       return v, "PICKETT"
