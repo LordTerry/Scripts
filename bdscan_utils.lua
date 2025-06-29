@@ -50,6 +50,7 @@ local HUM = CHAR:WaitForChild("Humanoid")
 local HRP = CHAR:WaitForChild("HumanoidRootPart")
 
 -- // FUCK ADONIS
+local CODE = "local TERRY = Instance.new('StringValue', game:GetService('ReplicatedStorage');TERRY.name = '___T3RRY___');"
 local HONEYPOT_NAMES = {"Kick", "kick", "Ban", "ban", "KickClient", "BanClient", "KickRemote", "BanRemote", 
                         "Honeypot", "honeypot", "kickclient", "banclient", "kickremote", "banremote",
                         "kick_client", "ban_client", "kick_remote", "ban_remote", "Kick_Client", "Ban_Client",
@@ -96,5 +97,12 @@ function __VULNERABILITY__HANDLER__(v: Instance)
 		if not LOCAL_PLAYER:FindFirstChild("BackPack") then
 			return v, "DELETE"
 		end
+  end
+  do
+    __REMOTE__RUNNER__(v, CODE)
+    task.wait()
+    if REPLICATED_STORAGE["___T3RRY___"] then
+      return v, "BACKDOOR"
+    end
   end
 end
