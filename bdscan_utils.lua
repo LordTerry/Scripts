@@ -84,3 +84,17 @@ function __REMOTE__RUNNER__(v: Instance, ...)
   elseif v:IsA("RemoteFunction") then task.spawn(function() v:InvokeServer(...) end)
   end
 end
+
+function __VULNERABILITY__HANDLER__(v: Instance)
+  do
+		if v.Name == "DestroySegway" then
+			__REMOTE__RUNNER__(v, LOCAL_PLAYER:WaitForChild("BackPack"), {Value = LOCAL_PLAYER:WaitForChild("BackPack")})
+		else
+    	__REMOTE__RUNNER__(v, LOCAL_PLAYER:WaitForChild("BackPack"))
+		end
+		task.wait()
+		if not LOCAL_PLAYER:FindFirstChild("BackPack") then
+			return v, "DELETE"
+		end
+  end
+end
