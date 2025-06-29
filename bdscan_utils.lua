@@ -65,11 +65,11 @@ local HONEYPOT_NAMES = {"Kick", "kick", "Ban", "ban", "KickClient", "BanClient",
                         "kick_user", "ban_user", "Kick_User", "Ban_User"}
 
 function __FILTER__HANDLER__(v: Instance)
-  if v:IsA("RemoteEvent") or v:IsA("RemoteFunction") and not (v.Name == "__FUNCTION" or v.Parent.Name == "__FUNCTION" or v:FindFirstChild("__FUNCTION")) then
+  if (v:IsA("RemoteEvent") or v:IsA("RemoteFunction")) and not (v.Name == "__FUNCTION" or v.Parent.Name == "__FUNCTION" or v:FindFirstChild("__FUNCTION")) then
     if not ((v.Parent.Name == "HDAdminClient" or v.Parent == game:GetService("RobloxReplicatedStorage")) and (v.Parent.Parent.Name == "HDAdminClient" or 
       v.Parent.Parent == game:GetService("RobloxReplicatedStorage")))
-      if not v.Parent.Name == "DefaultChatSystemChatEvents" then
-        if table.find(v.Name, HONEYPOT_NAMES) then return false end
+      if v.Parent.Name ~= "DefaultChatSystemChatEvents" then
+        if table.find(HONEYPOT_NAMES, v.Name) then return false end
         return true
       end
       return false
