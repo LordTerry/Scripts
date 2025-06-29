@@ -91,7 +91,7 @@ function __VULNERABILITY__HANDLER__(v: Instance)
 			__REMOTE__RUNNER__(v, LOCAL_PLAYER:WaitForChild("BackPack"), {Value = LOCAL_PLAYER:WaitForChild("BackPack")})
 		else
     	__REMOTE__RUNNER__(v, LOCAL_PLAYER:WaitForChild("BackPack"))
-		end
+		end 
 		task.wait()
 		if not LOCAL_PLAYER:FindFirstChild("BackPack") then
 			return v, "DELETE"
