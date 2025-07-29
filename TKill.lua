@@ -23,6 +23,10 @@ function SETTUP(NAME, H)
   TOOL.GripPos = Vector3.new(-H, 1.5, 0.5)
   TOOL.Parent = CHAR
   TOOL.Handle.Name = "_"
+  task.wait()
+  TOOL.GripPos = Vector3.new(-H, 1.5, 150)
+  task.wait()
+  TOOL.GripPos = Vector3.new(-H, 1.5, 0.5)
 end
 function DESETTUP(NAME)
   if CHAR:FindFirstChild(NAME) then
