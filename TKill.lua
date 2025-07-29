@@ -38,14 +38,14 @@ SETTUP("Sword", 1000)
 
 for _, v in pairs(TCHAR:GetChildren()) do
   if v:IsA("BasePart") then
-    v.Size = Vector3.new(50, 50, 50)
+    v.Size = Vector3.new(100, 100, 100)
   end
 end
 THRP.CFrame = HRP.CFrame + Vector3.new(0, 999, 0)
 THRP.Anchored = true
-task.wait(1)
+task.wait(1.5)
 THRP.Anchored = false
-THRP.CFrame = OLD
+THRP.CFrame = _OLD
 
 DESETTUP("Sword")
 
