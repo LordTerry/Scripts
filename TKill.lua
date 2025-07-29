@@ -43,10 +43,12 @@ for _, v in pairs(TCHAR:GetChildren()) do
 end
 THRP.CFrame = HRP.CFrame + Vector3.new(0, 999, 0)
 THRP.Anchored = true
-task.wait()
-THRP.CFrame = _OLD
-task.wait()
-THRP.CFrame = HRP.CFrame + Vector3.new(0, 999, 0)
+for i=1, 10 do
+  task.wait(0.025)
+  THRP.CFrame = _OLD
+  task.wait(0.025)
+  THRP.CFrame = HRP.CFrame + Vector3.new(0, 999, 0)
+end
 task.wait(1.5)
 THRP.Anchored = false
 THRP.CFrame = _OLD
