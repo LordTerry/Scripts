@@ -10,7 +10,7 @@ local TARGET = PLRS["MegaSkidOfAlISkids"]
 local TCHAR = TARGET.Character or TARGET.CharacterAdded:Wait()
 local THRP = TCHAR:WaitForChild("HumanoidRootPart")
 local THUM = TCHAR:WaitForChild("Humanoid")
-local OLD = THRP.CFrame
+local _OLD = THRP.CFrame
 
 --//FUNCS
 function SETTUP(NAME, H)
@@ -18,14 +18,24 @@ function SETTUP(NAME, H)
     CHAR[NAME].Parent = PLR.Backpack
   end
   TOOL = PLR.Backpack[NAME]
+  getgenv().__OLD = TOOL.GripPos
   
   TOOL.GripPos = Vector3.new(-H, 1.5, 0.5)
   TOOL.Parent = CHAR
   TOOL.Handle.Name = "_"
 end
+function DESETTUP(NAME)
+  if CHAR:FindFirstChild(NAME) then
+    CHAR[NAME].Parent = PLR.Backpack
+  end
+  TOOL = PLR.Backpack[NAME]
+  TOOL["_"].Name = "Handle"
+  TOOL.GripPos = getgenv().__OLD
+end 
 
 --//MAIN CODE IDK
 SETTUP("Sword", 1000)
+
 for _, v in pairs(TCHAR:GetChildren()) do
   if v:IsA("BasePart") then
     v.Size = Vector3.new(50, 50, 50)
@@ -36,3 +46,6 @@ THRP.Anchored = true
 task.wait(1)
 THRP.Anchored = false
 THRP.CFrame = OLD
+
+DESETTUP("Sword")
+
