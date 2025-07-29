@@ -14,7 +14,7 @@ local OLD = THRP.CFrame
 
 --//FUNCS
 function SETTUP(NAME, H)
-  if CHAR[NAME] then
+  if CHAR:FindFirstChild(NAME) then
     CHAR[NAME].Parent = PLR.Backpack
   end
   TOOL = PLR.Backpack[NAME]
