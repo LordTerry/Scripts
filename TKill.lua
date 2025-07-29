@@ -23,10 +23,6 @@ function SETTUP(NAME, H)
   TOOL.GripPos = Vector3.new(-H, 1.5, 0.5)
   TOOL.Parent = CHAR
   TOOL.Handle.Name = "_"
-  task.wait()
-  TOOL.GripPos = Vector3.new(-H, 1.5, 150)
-  task.wait()
-  TOOL.GripPos = Vector3.new(-H, 1.5, 0.5)
 end
 function DESETTUP(NAME)
   if CHAR:FindFirstChild(NAME) then
@@ -47,6 +43,10 @@ for _, v in pairs(TCHAR:GetChildren()) do
 end
 THRP.CFrame = HRP.CFrame + Vector3.new(0, 999, 0)
 THRP.Anchored = true
+task.wait()
+THRP.CFrame = _OLD
+task.wait()
+THRP.CFrame = HRP.CFrame + Vector3.new(0, 999, 0)
 task.wait(1.5)
 THRP.Anchored = false
 THRP.CFrame = _OLD
