@@ -1,50 +1,38 @@
 -- // Terry's Default initialization
-function __UNDETECTED__SERVICE__LOADER__(service: string)
-    -- // INITIALIZATION
-    local __SERVICE__ORIGINAL__ = game:FindFirstChildWhichIsA(service) or game:GetService(service) -- // FindFirstChildWhichIsA Helps finding services pre-loaded more faster.
-    local __SERVICE__PROXY__ = newproxy(true)
-    local __METATABLE__ = getmetatable(__SERVICE__PROXY__)
-			   
-    -- // CREATES NECESSARY METAMETHODS FOR THE NEW PROXY.
-    function __METATABLE__:__newindex(key: string, value: any)
-        __SERVICE__ORIGINAL__[key] = value
-    end
-    function __METATABLE__:__index(key: string)
-	local __index = __SERVICE__ORIGINAL__[key]
-	if type(__index) == "function" then
-		return function(self, ...)
-			return __index(__SERVICE__ORIGINAL__, ...)
-		end
-	end
-	return __index
-    end
-    
-    -- // LOCKING...
-    __METATABLE__.__type = "Instance"
-    __METATABLE__.__metatable = "Locked."
-	
-    if __SERVICE__PROXY__ == __SERVICE__ORIGINAL__ then return "DETECTED_SERVICE" end
-    return __SERVICE__PROXY__
-end
+--//LUAVM RADIATION (TRIGGER ALERT!!!!)
+local game = game
+local V3N = Vector3.new
+local V3Z = Vector3.zero
+local workspace = workspace
+local setmetatable = setmetatable
+local getmetatable = getmetatable
+local pcall = pcall
+local setfenv = setfenv
+local getfenv = getfenv
+local require = require
 
--- // SOME VARIABLES
-local RUN_SERVICE = __UNDETECTED__SERVICE__LOADER__("RunService")
-local PLAYERS = __UNDETECTED__SERVICE__LOADER__("Players")
-local COREGUI = __UNDETECTED__SERVICE__LOADER__("CoreGui")
-local USER_INPUT_SERVICE = __UNDETECTED__SERVICE__LOADER__("UserInputService")
-local TWEEN_SERVICE = __UNDETECTED__SERVICE__LOADER__("TweenService")
-local HTTP_SERVICE = __UNDETECTED__SERVICE__LOADER__("HttpService")
-local STARTER_GUI = __UNDETECTED__SERVICE__LOADER__("StarterGui")
-local GUI_SERVICE = __UNDETECTED__SERVICE__LOADER__("GuiService")
-local LIGHTING = __UNDETECTED__SERVICE__LOADER__("Lighting")
-local CONTEXT_ACTION_SERVICE = __UNDETECTED__SERVICE__LOADER__("ContextActionService")
-local REPLICATED_STORAGE = __UNDETECTED__SERVICE__LOADER__("ReplicatedStorage")
-local STARTER_PLAYER = __UNDETECTED__SERVICE__LOADER__("StarterPlayer")
-local PROXIMITY_PROMPT_SERVICE = __UNDETECTED__SERVICE__LOADER__("ProximityPromptService")
-local TEXT_SERVICE = __UNDETECTED__SERVICE__LOADER__("TextService")
-local TEXT_CHAT_SERVICE = __UNDETECTED__SERVICE__LOADER__("TextChatService")
-local SERVER_PLAYERS = PLAYERS:GetPlayers()
-local LOCAL_PLAYER = PLAYERS.LocalPlayer
-local CHAR = LOCAL_PLAYER.Character or LOCAL_PLAYER.CharacterAdded:Wait()
-local HUM = CHAR:WaitForChild("Humanoid")
-local HRP = CHAR:WaitForChild("HumanoidRootPart")
+--//funcs
+local function __UD_SERVICE_LOADER__(srv) return cloneref(srv) end
+
+--//def
+local RUN_SERVICE =                 __UD_SERVICE_LOADER__("RunService")
+local PLAYERS =                     __UD_SERVICE_LOADER__("Players")
+local COREGUI =                     __UD_SERVICE_LOADER__("CoreGui")
+local USER_INPUT_SERVICE =          __UD_SERVICE_LOADER__("UserInputService")
+local TWEEN_SERVICE =               __UD_SERVICE_LOADER__("TweenService")
+local HTTP_SERVICE =                __UD_SERVICE_LOADER__("HttpService")
+local STARTER_GUI =                 __UD_SERVICE_LOADER__("StarterGui")
+local GUI_SERVICE =                 __UD_SERVICE_LOADER__("GuiService")
+local LIGHTING =                    __UD_SERVICE_LOADER__("Lighting")
+local CONTEXT_ACTION_SERVICE =      __UD_SERVICE_LOADER__("ContextActionService")
+local REPLICATED_STORAGE =          __UD_SERVICE_LOADER__("ReplicatedStorage")
+local STARTER_PLAYER =              __UD_SERVICE_LOADER__("StarterPlayer")
+local PROXIMITY_PROMPT_SERVICE =    __UD_SERVICE_LOADER__("ProximityPromptService")
+local TEXT_SERVICE =                __UD_SERVICE_LOADER__("TextService")
+local TEXT_CHAT_SERVICE =           __UD_SERVICE_LOADER__("TextChatService")
+
+local SERVER_PLAYERS =     PLAYERS:GetPlayers()
+local LOCAL_PLAYER =       PLAYERS.LocalPlayer
+local CHAR =               LOCAL_PLAYER.Character or LOCAL_PLAYER.CharacterAdded:Wait()
+local HUM =                CHAR:WaitForChild("Humanoid")
+local HRP =                CHAR:WaitForChild("HumanoidRootPart")
