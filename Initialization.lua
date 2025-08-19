@@ -1,4 +1,3 @@
--- // Terry's Default initialization
 --//LUAVM RADIATION (TRIGGER ALERT!!!!)
 local game = game
 local V3N = Vector3.new
@@ -36,3 +35,17 @@ local LOCAL_PLAYER =       PLAYERS.LocalPlayer
 local CHAR =               LOCAL_PLAYER.Character or LOCAL_PLAYER.CharacterAdded:Wait()
 local HUM =                CHAR:WaitForChild("Humanoid")
 local HRP =                CHAR:WaitForChild("HumanoidRootPart")
+
+local SETHID = sethiddenproperty or set_hidden_property or set_hid_prop or function(i, p, v) i[p] = v end
+local GETHID = gethiddenproperty or get_hidden_property or get_hid_prop or function(i, p) return i[p] end
+
+local function __set(i: Instance, p: string, v) xpcall(function() 
+      SETHID(i, p, v) end, function()
+      print("Error.")
+    end) 
+end
+local function __get(i: Instance, p: string) xpcall(function() 
+      GETHID(i, p) end, function()
+      print("Error.")
+    end) 
+end
