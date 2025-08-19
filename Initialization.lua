@@ -36,9 +36,11 @@ local CHAR =               LOCAL_PLAYER.Character or LOCAL_PLAYER.CharacterAdded
 local HUM =                CHAR:WaitForChild("Humanoid")
 local HRP =                CHAR:WaitForChild("HumanoidRootPart")
 
+--//UNC related.
 local SETHID = sethiddenproperty or set_hidden_property or set_hid_prop or function(i, p, v) i[p] = v end
 local GETHID = gethiddenproperty or get_hidden_property or get_hid_prop or function(i, p) return i[p] end
 
+--//Protected funccs
 local function __set(i: Instance, p: string, v) xpcall(function() 
       SETHID(i, p, v) end, function()
       print("Error.")
