@@ -11,7 +11,7 @@ local getfenv = getfenv
 local require = require
 
 --//funcs
-local function __UD_SERVICE_LOADER__(srv) return cloneref(srv) end
+local function __UD_SERVICE_LOADER__(srv) return cloneref(game:GetService(srv)) end
 
 --//def
 local RUN_SERVICE =                 __UD_SERVICE_LOADER__("RunService")
@@ -55,23 +55,23 @@ end
 --//Def
 settings()["Physics"].PhysicsEnvironmentalThrottle = 	Enum.EnviromentalPhysicsThrottle.Disabled
 settings()["Physics"].ThrottleAdjustTime = 				math.huge
-settings()["Render"].EagerBulkExecution = 				true
+settings()["Rendering"].EagerBulkExecution = 			true
 settings()["Physics"].AllowSleep = 						false
 settings()["Physics"].DisableCSGv2 = 					true
 settings()["Physics"].ForceCSGv2 = 						false
 settings()["Physics"].UseCSGv2 = 						false
 
 --//Simradius
-RUN_SERVICE:RunToBindStep("___Simulation", 0, function()
+RUN_SERVICE:BindToRenderStep("___Simulation", 0, function()
 	for _, v in pairs(SERVER_PLAYERS) do
         if v ~= LOCAL_PLAYER then
-            SET_HID(v, "SimulationRadius", 0)
-            SET_HID(v, "MaximumSimulationRadius", 0)
-            SET_HID(v, "MaxSimulationRadius", 0)
+            __set(v, "SimulationRadius", 0)
+            __set(v, "MaximumSimulationRadius", 0)
+            __set(v, "MaxSimulationRadius", 0)
         else
-            SET_HID(v, "MaximumSimulationRadius", 9e9)
-            SET_HID(v, "MaxSimulationRadius", 9e9)
-            SET_HID(v, "SimulationRadius", 9e9)
+            __set(v, "MaximumSimulationRadius", 9e9)
+            __set(v, "MaxSimulationRadius", 9e9)
+            __set(v, "SimulationRadius", 9e9)
         end
     end
 end)
