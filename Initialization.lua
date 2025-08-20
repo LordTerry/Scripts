@@ -12,6 +12,7 @@ local require = require
 
 --//funcs
 local function __UD_SERVICE_LOADER__(srv) return cloneref(srv) end
+local function __prev(v) return v.CFrame + v.Velocity * (__UD_SERVICE_LOADER__("Stats").Network.ServerStatsItem["Data Ping"]:GetValue() * 3) end
 
 --//def
 local RUN_SERVICE =                 __UD_SERVICE_LOADER__("RunService")
