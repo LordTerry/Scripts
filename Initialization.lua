@@ -11,7 +11,7 @@ local getfenv = getfenv
 local require = require
 
 --//funcs
-local function __UD_SERVICE_LOADER__(srv) return cloneref(srv) end
+local function __UD_SERVICE_LOADER__(srv) return cloneref(game:GetService(srv)) end
 
 --//def
 local RUN_SERVICE =                 __UD_SERVICE_LOADER__("RunService")
