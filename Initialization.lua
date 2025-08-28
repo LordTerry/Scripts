@@ -33,7 +33,34 @@ local getfenv =         getfenv
 local require =         require
 
 --//funcs
-local function __UD_SERVICE_LOADER__(srv) return cloneref(game:GetService(srv)) end
+local function __cloneref(i: Instance) 
+    if cloneref or clone_ref or cache.cloneref then
+        return cloneref or clone_ref or cache.cloneref
+    else
+        --//Proxying.
+        local __proxy = newproxy(true)
+        local __mt = getmetatable(__proxy)
+
+        --//MT Default vars (just get calls from the proxy and redirects to original.)
+        function __mt:__newindex(key: string, value: any)
+            i[key] = value
+        end
+        function __mt:__index(key: string, value: any)
+            if type(i[key]) == "function" then
+                return function(self, ...)
+                    return i[key](i, ...)
+                end
+            end
+            return i[key]
+        end
+
+        --//Locking.
+        __mt.__type = "Instance"
+        __mt.__metatable = "Locked."
+        return __mt
+    end
+end
+local function __UD_SERVICE_LOADER__(srv: string) return __cloneref(game:FindFirstChildWhichIsA(srv)) or __cloneref(game:GetService(srv)) end
 
 --//def
 local RUN_SERVICE =                 __UD_SERVICE_LOADER__("RunService")
@@ -59,11 +86,11 @@ local HUM =                CHAR:WaitForChild("Humanoid")
 local HRP =                CHAR:WaitForChild("HumanoidRootPart")
 
 --//UNC related.
-local SETHID = sethiddenproperty or set_hidden_property or set_hid_prop or function(i, p, v) i[p] = v end
-local GETHID = gethiddenproperty or get_hidden_property or get_hid_prop or function(i, p) return i[p] end
+local SETHID = sethiddenproperty or set_hidden_property or set_hid_prop or function(i: Instance, p: string, v: any) i[p] = v end
+local GETHID = gethiddenproperty or get_hidden_property or get_hid_prop or function(i: Instance, p: string) return i[p] end
 
 --//Protected funccs
-local function __set(i: Instance, p: string, v) xpcall(function() 
+local function __set(i: Instance, p: string, v: any) xpcall(function() 
       SETHID(i, p, v) end, function()
       print("Error.")
     end) 
