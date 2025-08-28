@@ -1,17 +1,66 @@
 --//LUAVM RADIATION (TRIGGER ALERT!!!!)
-local game = game
-local V3N = Vector3.new
-local V3Z = Vector3.zero
-local workspace = workspace
-local setmetatable = setmetatable
-local getmetatable = getmetatable
-local pcall = pcall
-local setfenv = setfenv
-local getfenv = getfenv
-local require = require
+local game =            game
+local V3N =             Vector3.new
+local V3Z =             Vector3.zero
+local V3O =             Vector3.one
+local V3XA =            Vector3.xAxis
+local V3YA =            Vector3.yAxis
+local V3ZA =            Vector3.zAxis
+local CFN =             CFrame.new
+local CFA =             CFrame.Angles
+local CFI =             CFrame.identity
+local CFR =             CFrame.fromRotationMatrix
+local CFP =             CFrame.lookAt
+local RAD =             math.rad
+local DEG =             math.deg
+local SIN =             math.sin
+local COS =             math.cos
+local ABS =             math.abs
+local FLOOR =           math.floor
+local CEIL =            math.ceil
+local CLAMP =           math.clamp
+local MAX =             math.max
+local MIN =             math.min
+local SQRT =            math.sqrt
+local PI =              math.pi
+local workspace =       workspace
+local setmetatable =    setmetatable
+local getmetatable =    getmetatable
+local pcall =           pcall
+local xpcall =          xpcall
+local setfenv =         setfenv
+local getfenv =         getfenv
+local require =         require
 
 --//funcs
-local function __UD_SERVICE_LOADER__(srv) return cloneref(game:GetService(srv)) end
+local function __cloneref(i: Instance) 
+    if cloneref or clone_ref or cache.cloneref then
+        return cloneref or clone_ref or cache.cloneref
+    else
+        --//Proxying.
+        local __proxy = newproxy(true)
+        local __mt = getmetatable(__proxy)
+
+        --//MT Default vars (just get calls from the proxy and redirects to original.)
+        function __mt:__newindex(key: string, value: any)
+            i[key] = value
+        end
+        function __mt:__index(key: string, value: any)
+            if type(i[key]) == "function" then
+                return function(self, ...)
+                    return i[key](i, ...)
+                end
+            end
+            return i[key]
+        end
+
+        --//Locking.
+        __mt.__type = "Instance"
+        __mt.__metatable = "Locked."
+        return __mt
+    end
+end
+local function __UD_SERVICE_LOADER__(srv: string) return __cloneref(game:FindFirstChildWhichIsA(srv)) or __cloneref(game:GetService(srv)) end
 
 --//def
 local RUN_SERVICE =                 __UD_SERVICE_LOADER__("RunService")
@@ -37,11 +86,11 @@ local HUM =                CHAR:WaitForChild("Humanoid")
 local HRP =                CHAR:WaitForChild("HumanoidRootPart")
 
 --//UNC related.
-local SETHID = sethiddenproperty or set_hidden_property or set_hid_prop or function(i, p, v) i[p] = v end
-local GETHID = gethiddenproperty or get_hidden_property or get_hid_prop or function(i, p) return i[p] end
+local SETHID = sethiddenproperty or set_hidden_property or set_hid_prop or function(i: Instance, p: string, v: any) i[p] = v end
+local GETHID = gethiddenproperty or get_hidden_property or get_hid_prop or function(i: Instance, p: string) return i[p] end
 
 --//Protected funccs
-local function __set(i: Instance, p: string, v) xpcall(function() 
+local function __set(i: Instance, p: string, v: any) xpcall(function() 
       SETHID(i, p, v) end, function()
       print("Error.")
     end) 
