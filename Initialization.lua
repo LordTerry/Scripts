@@ -35,7 +35,7 @@ local require =         require
 --//funcs
 local function __cloneref(i: Instance) 
     if cloneref or clone_ref or cache.cloneref then
-        return cloneref or clone_ref or cache.cloneref
+        return cloneref(i) or clone_ref(i) or cache.cloneref(i)
     else
         --//Proxying.
         local __proxy = newproxy(true)
